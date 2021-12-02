@@ -5,7 +5,11 @@ import cors from "cors"
 import { Server } from "socket.io"
 import { route } from "./router";
 const app = express();
-app.use(cors())
+const corsOptions = {
+  origin: process.env.FRONTEND_HOST,
+  credentials: true,
+}
+app.use(cors(corsOptions))
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {
